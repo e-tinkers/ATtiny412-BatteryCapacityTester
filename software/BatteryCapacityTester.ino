@@ -310,8 +310,8 @@ void DAC_setLoad(uint16_t current) {
   DACreference = 0;                               // start finding best reference
   if(current > 3000) current = 3000;              // limit current to max 300mA
   while(current > DACCUR[DACreference]) DACreference++; // search for best reference
-  VREF_CTRLA &= 0xf8;                             // clear reference bits
-  VREF_CTRLA |= DACREF[DACreference];             // set new reference
+  VREF.CTRLA &= 0xf8;                             // clear reference bits
+  VREF.CTRLA |= DACREF[DACreference];             // set new reference
   _delay_us(25);                                  // wait for reference to settle
   DAC0.DATA = (uint32_t)255 * current / DACCUR[DACreference]; // set DAC accordingly
 }
